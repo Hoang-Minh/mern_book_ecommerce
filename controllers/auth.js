@@ -24,7 +24,7 @@ exports.signIn = (req, res, next) => {
   const user = User.findOne({ email }, (error, user) => {
     if (error || !user) {
       return res
-        .staus(400)
+        .status(400)
         .json({ error: "User with email does not exist. Please sign up" });
     }
 
