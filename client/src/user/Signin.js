@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Layout from "../core//Layout";
-import { signin } from "../auth";
+import { signin, authenticate } from "../auth";
 
 function Signin() {
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "abc@yahoo.com",
+    password: "minh123",
     error: "",
     loading: false,
     redirecToReferrer: false,
@@ -26,9 +26,11 @@ function Signin() {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
-        setValues({
-          ...values,
-          redirecToReferrer: true,
+        authenticate(data, () => {
+          setValues({
+            ...values,
+            redirecToReferrer: true,
+          });
         });
       }
     });
@@ -43,7 +45,7 @@ function Signin() {
           onChange={handleChange("email")}
           type="email"
           className="form-control"
-          values={email}
+          value={email}
         ></input>
       </div>
       <div className="form-group">
@@ -53,7 +55,7 @@ function Signin() {
           onChange={handleChange("password")}
           type="password"
           className="form-control"
-          values={password}
+          value={password}
         ></input>
       </div>
       <button onClick={clickSubmit} className="btn btn-primary">
@@ -84,8 +86,8 @@ function Signin() {
 
   return (
     <Layout
-      title="Signup"
-      description="Sign up to Node React E-commerce App"
+      title="SignIn"
+      description="Sign In to Node React E-commerce App"
       className="container col-md-8 offset-md-2"
     >
       {showLoading()}
