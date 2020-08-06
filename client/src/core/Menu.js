@@ -24,7 +24,7 @@ function Menu({ history }) {
           <Link
             className="nav-link"
             style={isActive(history, "/")}
-            to="/dashboard"
+            to="/user/dashboard"
           >
             Dashboard
           </Link>

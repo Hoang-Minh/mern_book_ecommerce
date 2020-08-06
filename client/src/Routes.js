@@ -15,7 +15,7 @@ function Routes() {
         <Route path="/signin" exact component={Signin}></Route>
         <Route path="/signup" exact component={Signup}></Route>
         <PrivateRoute
-          path="/dashboard"
+          path="/user/dashboard"
           exact
           component={Dashboard}
         ></PrivateRoute>
