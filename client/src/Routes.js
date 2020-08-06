@@ -5,7 +5,9 @@ import Signin from "./user/Signin";
 import Home from "./core/Home";
 import Menu from "./core/Menu";
 import PrivateRoute from "./auth/PrivateRoute";
-import Dashboard from "./user/userDashboard";
+import Dashboard from "./user/UserDashboard";
+import AdminRoute from "./auth/AdminRoutes";
+import AdminDashboard from "./user/AdminDashboard";
 
 function Routes() {
   return (
@@ -19,6 +21,11 @@ function Routes() {
           exact
           component={Dashboard}
         ></PrivateRoute>
+        <AdminRoute
+          path="/admin/dashboard"
+          exact
+          component={AdminDashboard}
+        ></AdminRoute>
       </Switch>
     </BrowserRouter>
   );

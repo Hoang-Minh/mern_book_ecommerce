@@ -88,6 +88,10 @@ function Signin() {
 
       return <Redirect to="user/dashboard"></Redirect>;
     }
+
+    if (isAuthenticated()) {
+      return <Redirect to="/"></Redirect>;
+    }
   };
 
   return (

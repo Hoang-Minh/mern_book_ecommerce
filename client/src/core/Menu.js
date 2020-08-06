@@ -20,15 +20,29 @@ function Menu({ history }) {
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            style={isActive(history, "/")}
-            to="/user/dashboard"
-          >
-            Dashboard
-          </Link>
-        </li>
+        {isAuthenticated() && isAuthenticated().user.role === 0 && (
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(history, "/")}
+              to="/user/dashboard"
+            >
+              Dashboard User
+            </Link>
+          </li>
+        )}
+
+        {isAuthenticated() && isAuthenticated().user.role === 1 && (
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(history, "/")}
+              to="/admin/dashboard"
+            >
+              Dashboard Admin
+            </Link>
+          </li>
+        )}
 
         {!isAuthenticated() && (
           <Fragment>
