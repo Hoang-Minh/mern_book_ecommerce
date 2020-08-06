@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../core//Layout";
-import { API } from "../config";
+import { signup } from "../auth";
 
 function Signup() {
   const [values, setValues] = useState({
@@ -16,25 +17,6 @@ function Signup() {
   };
 
   const { name, email, password, success, error } = values;
-
-  // const clickSubmit = (event) => {
-  //   event.preventDefault();
-  //   signup({ name, email, password }).then((data) => {
-  //     console.log(data);
-  //     // if (data.error) {
-  //     //   setValues({ ...values, error: data.error, success: false });
-  //     // } else {
-  //     //   setValues({
-  //     //     ...values,
-  //     //     name: "",
-  //     //     email: "",
-  //     //     password: "",
-  //     //     error: "",
-  //     //     success: true,
-  //     //   });
-  //     // }
-  //   });
-  // };
 
   const clickSubmit = (event) => {
     event.preventDefault();
@@ -54,23 +36,6 @@ function Signup() {
         });
       }
     });
-  };
-
-  const signup = (user) => {
-    return fetch(`${API}/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const signUpForm = () => (
@@ -125,7 +90,7 @@ function Signup() {
       className="alert alert-info"
       style={{ display: success ? "" : "none" }}
     >
-      New account is created. Please signin
+      New account is created. Please <Link to="/signin">Sign In</Link>
     </div>
   );
 
