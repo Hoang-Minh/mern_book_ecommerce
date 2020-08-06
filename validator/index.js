@@ -3,7 +3,6 @@ const { validationResult, check } = require("express-validator");
 const validator = [
   check("name").trim().not().isEmpty().withMessage("Name is required"),
   check("email")
-    .trim()
     .isEmail()
     .withMessage(
       "Email must be in right format and in between 3 and 32 characters"
