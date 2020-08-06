@@ -9,6 +9,8 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user.js");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
+const { notFound, errorHandler } = require("./helpers/error");
+
 // app
 const app = express();
 
@@ -33,6 +35,8 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
 
