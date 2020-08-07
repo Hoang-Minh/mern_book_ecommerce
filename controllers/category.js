@@ -1,5 +1,6 @@
 const Cateogry = require("../models/category");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+//const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.categoryById = (req, res, next, id) => {
   Cateogry.findById(id).exec((error, data) => {
@@ -10,10 +11,14 @@ exports.categoryById = (req, res, next, id) => {
   });
 };
 
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
   const category = new Cateogry(req.body);
+
   category.save((error, data) => {
-    if (error) return res.status(400).json({ error: errorHandler });
+    if (error) {
+      res.status(400);
+      return res.status(400).json({ error: errorHandler(error) });
+    }
 
     res.json({ data });
   });
