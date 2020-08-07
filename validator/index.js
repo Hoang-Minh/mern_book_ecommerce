@@ -1,6 +1,6 @@
 const { validationResult, check } = require("express-validator");
 
-const validator = [
+const signUpValidator = [
   check("name").trim().not().isEmpty().withMessage("Name is required"),
   check("email")
     .isEmail()
@@ -14,6 +14,28 @@ const validator = [
     .withMessage("Password needs at least 6 characters")
     .matches(/\d/)
     .withMessage("Password must has at least one number"),
+];
+
+const productValidator = [
+  check("name").trim().not().isEmpty().withMessage("Product name is required"),
+  check("description")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Product name is required"),
+  check("price")
+    .isNumeric()
+    .withMessage("Price has to be a numeric value and is missing"),
+  check("category")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Category name is required"),
+  check("shipping")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Shipping value is required"),
 ];
 
 const result = (req, res, next) => {
@@ -34,6 +56,7 @@ const result = (req, res, next) => {
 };
 
 module.exports = {
-  validator,
+  signUpValidator,
+  productValidator,
   result,
 };

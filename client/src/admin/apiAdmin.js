@@ -19,24 +19,15 @@ export const createCategory = (userId, token, category) => {
 };
 
 export const createProduct = (userId, token, product) => {
-  console.log(product);
-  const formBody = Object.keys(product)
-    .map(
-      (key) => encodeURIComponent(key) + "=" + encodeURIComponent(product[key])
-    )
-    .join("&");
-
-  console.log("formBody", formBody);
-
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
     headers: {
-      // Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      Accept: "application/json",
+      // "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       Authorization: `Bearer ${token}`,
     },
-    // body: product, // since we are sending on the file - image
-    body: formBody,
+    // body: qs.stringify(product),
+    body: product,
   })
     .then((response) => {
       return response.json();

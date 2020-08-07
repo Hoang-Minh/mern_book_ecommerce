@@ -19,7 +19,7 @@ function AddProduct() {
     error: "",
     createdProduct: "",
     redirectToProfile: false,
-    // formData: "",
+    formData: "",
   });
 
   const {
@@ -34,7 +34,7 @@ function AddProduct() {
     error,
     createdProduct,
     redirectToProfile,
-    // formData,
+    formData,
   } = values;
 
   // load categories and set form data
@@ -43,8 +43,8 @@ function AddProduct() {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        // setValues({ ...values, categories: data, formData: new FormData() });
-        setValues({ ...values, categories: data });
+        setValues({ ...values, categories: data, formData: new FormData() });
+        // setValues({ ...values, categories: data });
       }
     });
   };
@@ -54,35 +54,21 @@ function AddProduct() {
   }, []);
 
   const handleChange = (name) => (event) => {
+    console.log("before handle change", values);
     const value = name === "photo" ? event.target.files[0] : event.target.value;
-    // formData.set(name, value);
-    setValues({ ...values, [name]: value, createdProduct: "", error: "" });
+    formData.set(name, value);
+
+    setValues({ ...values, [name]: value });
   };
 
   const clickSubmit = (event) => {
     console.log("before submit", values);
     event.preventDefault();
+
+    // setValues({ ...values, error: "", loading: false, createdProduct: "" });
     setValues({ ...values, error: "", loading: true });
 
-    // createProduct(user._id, token, formData).then((data) => {
-    //   if (data.error) {
-    //     setValues({ ...values, error: data.error });
-    //   } else {
-    //     console.log("form data", values);
-    //     setValues({
-    //       ...values,
-    //       name: "",
-    //       description: "",
-    //       photo: "",
-    //       price: "",
-    //       quantity: "",
-    //       loading: false,
-    //       createdProduct: data.name,
-    //     });
-    //   }
-    // });
-
-    createProduct(user._id, token, values).then((data) => {
+    createProduct(user._id, token, formData).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
