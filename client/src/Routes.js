@@ -10,12 +10,14 @@ import AdminRoute from "./auth/AdminRoutes";
 import AdminDashboard from "./user/AdminDashboard";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
+import Shop from "./core/Shop";
 
 function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home}></Route>
+        <Route path="/shop" exact component={Shop}></Route>
         <Route path="/signin" exact component={Signin}></Route>
         <Route path="/signup" exact component={Signup}></Route>
         <PrivateRoute
