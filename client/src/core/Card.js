@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 import ShowImage from "./ShowImage";
-import { addItem } from "./cartHelpers";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
-function Card({ product, showViewProductButton = true }) {
+function Card({
+  product,
+  showViewProductButton = true,
+  showAddToCartButton = true,
+  cartUpdate = false,
+  showRemoveProductButton = false,
+  setRun = (f) => f,
+  run = undefined,
+}) {
   const [redirect, setRedirect] = useState(false);
+  const [count, setCount] = useState(product.count);
 
   const showViewButton = (showViewProductButton) => {
     return (
@@ -28,14 +37,40 @@ function Card({ product, showViewProductButton = true }) {
     if (redirect) return <Redirect to="/cart"></Redirect>;
   };
 
-  const showAddToCartButton = () => (
-    <button
-      onClick={() => addToCart(product)}
-      className="btn btn-outline-warning mt-2 mb-2"
-    >
-      Add to cart
-    </button>
-  );
+  const showAddToCart = (showAddToCartButton) =>
+    showAddToCartButton && (
+      <button
+        onClick={() => addToCart(product)}
+        className="btn btn-outline-warning mt-2 mb-2"
+      >
+        Add to cart
+      </button>
+    );
+
+  const handleChange = (productId) => (event) => {
+    setRun(!run); // run useEffect in parent Cart
+    setCount(event.target.value < 1 ? 1 : event.target.value);
+    if (event.target.value >= 1) {
+      updateItem(productId, event.target.value);
+    }
+  };
+
+  const showCartUpdateOptions = (cartUpdate) =>
+    cartUpdate && (
+      <div>
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text">Adjust Quantity</span>
+          </div>
+          <input
+            type="number"
+            className="form-control"
+            value={count}
+            onChange={handleChange(product._id)}
+          ></input>
+        </div>
+      </div>
+    );
 
   const showStock = (quantity) =>
     quantity > 0 ? (
@@ -43,6 +78,22 @@ function Card({ product, showViewProductButton = true }) {
     ) : (
       <span className="badge badge-primary badge-pill">Out of Stock</span>
     );
+
+  const showRemoveButton = (showRemoveProductButton) => {
+    return (
+      showRemoveProductButton && (
+        <button
+          onClick={() => {
+            removeItem(product._id);
+            setRun(!run); // run useEffect in parent Cart
+          }}
+          className="btn btn-outline-danger mt-2 mb-2"
+        >
+          Remove Product
+        </button>
+      )
+    );
+  };
 
   return (
     <div className="card">
@@ -61,7 +112,9 @@ function Card({ product, showViewProductButton = true }) {
         {showStock(product.quantity)}
         <br />
         {showViewButton(showViewProductButton)}
-        {showAddToCartButton()}
+        {showAddToCart(showAddToCartButton)}
+        {showRemoveButton(showRemoveProductButton)}
+        {showCartUpdateOptions(cartUpdate)}
       </div>
     </div>
   );
