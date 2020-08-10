@@ -12,6 +12,7 @@ import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import Shop from "./core/Shop";
 import Product from "./core/Product";
+import Cart from "./core/Cart";
 
 function Routes() {
   return (
@@ -42,6 +43,7 @@ function Routes() {
           component={AddProduct}
         ></AdminRoute>
         <Route path="/products/:productId" exact component={Product}></Route>
+        <Route path="/cart" exact component={Cart}></Route>
       </Switch>
     </BrowserRouter>
   );
