@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { getProducts } from "./apiCore";
-import Cart from "./Cart";
+import Card from "./Card";
 import Search from "./Search";
 
 function Home() {
@@ -44,14 +44,14 @@ function Home() {
       <h2 className="mb-4">New Arrivals</h2>
       <div className="row">
         {productByArrival.map((product, key) => (
-          <Cart key={key} product={product}></Cart>
+          <Card key={key} product={product}></Card>
         ))}
       </div>
 
       <h2 className="mb-4">Best Sellers</h2>
       <div className="row">
         {productBySale.map((product, key) => (
-          <Cart key={key} product={product}></Cart>
+          <Card key={key} product={product}></Card>
         ))}
       </div>
     </Layout>

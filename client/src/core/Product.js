@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { read } from "./apiCore";
-import Cart from "./Cart";
+import Card from "./Card";
 import Search from "./Search";
 
 function Product({ match }) {

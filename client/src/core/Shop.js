@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import Cart from "./Cart";
+import Card from "./Card";
 import { getCategories } from "../admin/apiAdmin";
 import { getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
@@ -125,7 +125,7 @@ function Shop() {
           <h2 className="mb-4">Products</h2>
           <div className="row">
             {filteredResults.map((product, index) => (
-              <Cart key={index} product={product}></Cart>
+              <Card key={index} product={product}></Card>
             ))}
           </div>
           <hr />

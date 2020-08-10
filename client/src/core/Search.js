@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCategories } from "../admin/apiAdmin";
-import Cart from "./Cart";
+import Card from "./Card";
 import { list } from "./apiCore";
 
 const Search = () => {
@@ -92,7 +92,7 @@ const Search = () => {
         <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
         <div className="row">
           {results.map((product, index) => (
-            <Cart key={index} product={product}></Cart>
+            <Card key={index} product={product}></Card>
           ))}
         </div>
       </div>
