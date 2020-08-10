@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
-import { getCategories } from "../admin/apiAdmin";
+import { getCategories } from "../core/apiCore";
 import { getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
 import RadioBox from "./RadioBox";
@@ -124,8 +124,10 @@ function Shop() {
         <div className="col-8">
           <h2 className="mb-4">Products</h2>
           <div className="row">
-            {filteredResults.map((product, index) => (
-              <Card key={index} product={product}></Card>
+            {filteredResults.map((product, key) => (
+              <div key={key} className="col-4 mb-3">
+                <Card product={product}></Card>
+              </div>
             ))}
           </div>
           <hr />

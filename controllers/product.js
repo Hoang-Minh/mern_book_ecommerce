@@ -5,13 +5,15 @@ const Product = require("../models/product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.productById = (req, res, next, id) => {
-  Product.findById(id).exec((error, product) => {
-    if (error || !product)
-      return res.status(400).json({ error: "Product not found" });
+  Product.findById(id)
+    .populate("category")
+    .exec((error, product) => {
+      if (error || !product)
+        return res.status(400).json({ error: "Product not found" });
 
-    req.product = product;
-    next();
-  });
+      req.product = product;
+      next();
+    });
 };
 
 exports.create = (req, res) => {

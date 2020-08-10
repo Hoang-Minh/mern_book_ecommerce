@@ -1,6 +1,14 @@
 import { API } from "../config";
 import queryString from "querystring";
 
+export const getCategories = () => {
+  return fetch(`${API}/categories`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
 export const getProducts = (sortBy) => {
   return fetch(`${API}/products?sortBy=${sortBy}&&order=desc&&limit=6`, {
     method: "GET",
@@ -44,4 +52,13 @@ export const read = (productId) => {
   })
     .then((response) => response.json())
     .catch((err) => console.log(err));
+};
+
+//router.get("/products/related/:productId", listRelated);
+export const listRelated = (productId) => {
+  return fetch(`${API}/products/related/${productId}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
 };

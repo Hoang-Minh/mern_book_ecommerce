@@ -44,14 +44,18 @@ function Home() {
       <h2 className="mb-4">New Arrivals</h2>
       <div className="row">
         {productByArrival.map((product, key) => (
-          <Card key={key} product={product}></Card>
+          <div key={key} className="col-4 mb-3">
+            <Card product={product}></Card>
+          </div>
         ))}
       </div>
 
       <h2 className="mb-4">Best Sellers</h2>
       <div className="row">
         {productBySale.map((product, key) => (
-          <Card key={key} product={product}></Card>
+          <div key={key} className="col-4 mb-3">
+            <Card product={product}></Card>
+          </div>
         ))}
       </div>
     </Layout>

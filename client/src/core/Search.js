@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCategories } from "../admin/apiAdmin";
+import { getCategories } from "../core/apiCore";
 import Card from "./Card";
 import { list } from "./apiCore";
 
