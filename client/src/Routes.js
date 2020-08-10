@@ -11,6 +11,7 @@ import AdminDashboard from "./user/AdminDashboard";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import Shop from "./core/Shop";
+import Product from "./core/Product";
 
 function Routes() {
   return (
@@ -40,6 +41,7 @@ function Routes() {
           exact
           component={AddProduct}
         ></AdminRoute>
+        <Route path="/products/:productId" exact component={Product}></Route>
       </Switch>
     </BrowserRouter>
   );

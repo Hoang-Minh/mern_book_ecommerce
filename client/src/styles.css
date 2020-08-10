@@ -10,6 +10,8 @@ border radius
 /* product image on card */
 .product-img {
   min-height: 100px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .jumbotron h2 {

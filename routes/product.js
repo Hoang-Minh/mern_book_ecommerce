@@ -11,21 +11,13 @@ const {
   listCategories,
   listBySearch,
   photo,
+  listSearch,
 } = require("../controllers/product");
 const { userById } = require("../controllers/user");
 const { productById } = require("../controllers/product");
-const { productValidator, result } = require("../validator");
 
-router.get("/product/:productId", read);
-router.post(
-  "/product/create/:userId",
-  requireSignIn,
-  isAuth,
-  isAdmin,
-  productValidator,
-  result,
-  create
-);
+router.get("/products/:productId", read);
+router.post("/product/create/:userId", requireSignIn, isAuth, isAdmin, create);
 router.delete(
   "/product/:productId/:userId",
   requireSignIn,
@@ -41,6 +33,7 @@ router.put(
   update
 );
 router.get("/products", list);
+router.get("/products/search", listSearch);
 router.get("/products/related/:productId", listRelated);
 router.get("/products/categories", listCategories);
 // route - make sure its post

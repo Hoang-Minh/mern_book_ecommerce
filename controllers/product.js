@@ -3,7 +3,6 @@ const _ = require("lodash");
 const fs = require("fs");
 const Product = require("../models/product");
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const { request } = require("http");
 
 exports.productById = (req, res, next, id) => {
   Product.findById(id).exec((error, product) => {
@@ -41,8 +40,13 @@ exports.create = (req, res) => {
       product.photo.contentType = files.photo.type;
     }
 
+    console.log("product controller - saved");
+
     product.save((error, result) => {
-      if (error) return res.status(400).json({ error: errorHandler(error) });
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ error: errorHandler(error) });
+      }
 
       res.json(result);
     });
@@ -196,4 +200,26 @@ exports.photo = (req, res, next) => {
   }
 
   next();
+};
+
+exports.listSearch = (req, res) => {
+  // create query object to hold search value and category value
+  const query = {};
+  // asign search value to query.name
+  if (req.query.search) {
+    query.name = { $regex: req.query.search, $options: "i" };
+
+    // asign category value to query.category
+    if (req.query.cateogry & (req.query.category !== "All")) {
+      query.category = req.query.category;
+    }
+
+    // find the product based on query object with 2 properties
+    // search and category
+    Product.find(query, (error, products) => {
+      if (error) return res.status(400).json({ error: errorHandler(error) });
+
+      res.json(products);
+    }).select("-photo");
+  }
 };

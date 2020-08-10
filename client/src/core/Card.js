@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ShowImage from "./ShowImage";
 
-function Cart({ product }) {
+function Card({ product }) {
   return (
     <div className="col-4 mb-3">
       <div className="card">
@@ -11,7 +11,7 @@ function Cart({ product }) {
           <ShowImage item={product} url="product"></ShowImage>
           <p>{product.description.substring(0, 10)}</p>
           <p>${product.price}</p>
-          <Link to="/">
+          <Link to={`/products/${product._id}`}>
             <button className="btn btn-outline-primary mt-2 mb-2 mr-2">
               View Product
             </button>
@@ -25,4 +25,4 @@ function Cart({ product }) {
   );
 }
 
-export default Cart;
+export default Card;
