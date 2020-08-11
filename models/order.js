@@ -32,7 +32,7 @@ const OrderSchema = new Schema(
       ], // enum means string objects
     },
     updated: Date,
-    user: { type: ObjectId, ref: "User" },
+    user: { type: ObjectId, ref: "user" },
   },
   { timestamps: true }
 );

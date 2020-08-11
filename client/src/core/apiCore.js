@@ -1,14 +1,6 @@
 import { API } from "../config";
 import queryString from "querystring";
 
-export const getCategories = () => {
-  return fetch(`${API}/categories`, {
-    method: "GET",
-  })
-    .then((response) => response.json())
-    .catch((error) => console.log(error));
-};
-
 export const getProducts = (sortBy) => {
   return fetch(`${API}/products?sortBy=${sortBy}&&order=desc&&limit=6`, {
     method: "GET",
