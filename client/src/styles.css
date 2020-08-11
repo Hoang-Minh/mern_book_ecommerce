@@ -10,9 +10,9 @@ border radius
 /* cart-badge */
 .cart-badge,
 .cart-badge:hover {
-  border-radius: 50%;
-  padding: 2px;
-  font-size: 12px;
+  border-radius: 25%;
+  padding: 2px 10px;
+  font-size: 14px;
   font-style: italic;
   background: #000;
 }
