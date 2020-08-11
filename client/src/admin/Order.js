@@ -30,9 +30,19 @@ const Orders = () => {
     return <h1 className="text-danger">No orders</h1>;
   };
 
-  const noOrders = (orders) => {
-    return orders.length > 1 ? <h4>No orders</h4> : null;
-  };
+  const showInput = (key, value) => (
+    <div className="input-group mb-2 mr-sm-2">
+      <div className="input-group-prepend">
+        <div className="input-group-text">{key}</div>
+      </div>
+      <input
+        type="text"
+        value={value}
+        className="form-control"
+        readOnly
+      ></input>
+    </div>
+  );
 
   useEffect(() => {
     loadOrders();
@@ -74,6 +84,19 @@ const Orders = () => {
                 <h3 className="mt-4 mb-4 font-italic">
                   Total products in the order: {o.products.length}
                 </h3>
+
+                {o.products.map((p, pKey) => (
+                  <div
+                    className="mb-4"
+                    key={pKey}
+                    style={{ padding: "20px", border: "1px solid indigo" }}
+                  >
+                    {showInput("Product name", p.name)}
+                    {showInput("Product price", p.price)}
+                    {showInput("Product total", p.count)}
+                    {showInput("Product Id", p._id)}
+                  </div>
+                ))}
               </div>
             );
           })}
