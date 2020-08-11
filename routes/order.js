@@ -6,6 +6,9 @@ const {
   create,
   addOrderToUserHistory,
   listOrders,
+  getStatusValue,
+  updateStatusOrder,
+  orderById,
 } = require("../controllers/order");
 const { decreaseQuantity } = require("../controllers/product");
 
@@ -19,7 +22,22 @@ router.post(
 );
 
 router.get("/order/list/:userId", requireSignIn, isAuth, isAdmin, listOrders);
+router.get(
+  "/order/status-values/:userId",
+  requireSignIn,
+  isAuth,
+  isAdmin,
+  getStatusValue
+);
+router.put(
+  "/order/:orderId/status/:userId",
+  requireSignIn,
+  isAuth,
+  isAdmin,
+  updateStatusOrder
+);
 
 router.param("userId", userById);
+router.param("orderId", orderById);
 
 module.exports = router;
