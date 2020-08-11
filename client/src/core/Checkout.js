@@ -7,6 +7,7 @@ import { emptyCart } from "./cartHelpers";
 
 function Checkout({ products, setRun = (f) => f, run = undefined }) {
   const [data, setData] = useState({
+    loading: false,
     success: false,
     clientToken: null,
     error: "",
@@ -48,6 +49,7 @@ function Checkout({ products, setRun = (f) => f, run = undefined }) {
   };
 
   const buy = () => {
+    setData({ loading: true });
     // send he nonce = data.instance.requestPaymentMethod() to server;
     let nonce;
     data.instance
@@ -77,12 +79,16 @@ function Checkout({ products, setRun = (f) => f, run = undefined }) {
             emptyCart(() => {
               console.log("empty cart");
               setRun(!run); // run useEffect in parent Cart
+              setData({ loading: false });
             });
 
             // empty cart
             //create order
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            console.log(error);
+            setData({ loading: false });
+          });
       })
       .catch((error) => {
         //console.log("dropping error", error);
@@ -108,12 +114,18 @@ function Checkout({ products, setRun = (f) => f, run = undefined }) {
     </div>
   );
 
+  const showLoading = (loading) => loading && <h2>Loading...</h2>;
+
   const showDropIn = () => (
     <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <DropIn
-            options={{ authorization: data.clientToken }}
+            options={{
+              authorization: data.clientToken,
+              paypal: { flow: "vault" },
+              paypalCredit: { flow: "vault" },
+            }}
             onInstance={(instance) => (data.instance = instance)}
           ></DropIn>
           <button onClick={buy} className="btn btn-success btn-block">
@@ -127,6 +139,7 @@ function Checkout({ products, setRun = (f) => f, run = undefined }) {
   return (
     <div>
       <h2>Total: ${getTotal()}</h2>
+      {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
