@@ -16,7 +16,8 @@ const {
 const { userById } = require("../controllers/user");
 const { productById } = require("../controllers/product");
 
-router.get("/products/:productId", read);
+// endpoints
+router.get("/product/:productId", read);
 router.post("/product/create/:userId", requireSignIn, isAuth, isAdmin, create);
 router.delete(
   "/product/:productId/:userId",

@@ -15,6 +15,7 @@ import Cart from "./core/Cart";
 import Orders from "./admin/Order";
 import Profile from "./user/Profile";
 import ManageProducts from "./admin/ManageProducts";
+import UpdateProduct from "./admin/UpdateProduct";
 
 function Routes() {
   return (
@@ -46,6 +47,11 @@ function Routes() {
           path="/admin/products"
           exact
           component={ManageProducts}
+        ></AdminRoute>
+        <AdminRoute
+          path="/admin/product/update/:productId"
+          exact
+          component={UpdateProduct}
         ></AdminRoute>
         <PrivateRoute
           path="/user/dashboard"

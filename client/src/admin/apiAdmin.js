@@ -88,7 +88,7 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
 // update a single product
 // delete single product
 export const getProducts = () => {
-  return fetch(`${API}/products`, {
+  return fetch(`${API}/products?limit=undefine`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -117,7 +117,7 @@ export const getProduct = (productId) => {
 };
 
 export const updateProduct = (productId, userId, token, product) => {
-  return fetch(`${API}/products/${productId}/${userId}`, {
+  return fetch(`${API}/product/${productId}/${userId}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
