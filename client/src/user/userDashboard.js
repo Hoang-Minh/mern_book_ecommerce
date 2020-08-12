@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { getPurchaseHistory } from "./apiUser";
+import moment from "moment";
 
 function UserDashboard() {
   const {
@@ -65,7 +66,26 @@ function UserDashboard() {
       <div className="card mb-5">
         <h3 className="card-header">Purchase History</h3>
         <ul className="list-group">
-          <li className="list-group-item">{JSON.stringify(history)}</li>
+          <li className="list-group-item">
+            {history.map((historyOrder, key) => {
+              let date;
+              return (
+                <div key={key}>
+                  <hr />
+                  {historyOrder.products.map((product, keyProduct) => {
+                    date = product.createdAt;
+                    return (
+                      <div key={keyProduct}>
+                        <h6>Product name: {product.name}</h6>
+                        <h6>Product price: {product.price}</h6>
+                      </div>
+                    );
+                  })}
+                  <h6>Purchased date: {moment(date).fromNow()}</h6>
+                </div>
+              );
+            })}
+          </li>
         </ul>
       </div>
     );
