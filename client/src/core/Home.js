@@ -21,6 +21,7 @@ function Home() {
 
   const loadProductByArrival = () => {
     getProducts("createdAt").then((data) => {
+      console.log(data);
       if (data.error) {
         setError(data.error);
       } else {

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt"); // for authorization check
 const User = require("../models/users");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const keys = require("../config/keys");
 
 exports.signup = (req, res, next) => {
   const user = new User(req.body);
@@ -35,7 +36,7 @@ exports.signIn = (req, res, next) => {
       return res.status(401).json({ error: "Email and password don't match" });
 
     // generate a signed token with user id and secret
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, keys.JWT_SECRET);
 
     // persist token as "t" in cookie with expiry date - should we have expiry date in token ???
     res.cookie("t", token, { expire: new Date() + 9999 });
@@ -53,7 +54,7 @@ exports.signOut = (req, res) => {
 };
 
 exports.requireSignIn = expressJwt({
-  secret: process.env.JWT_SECRET,
+  secret: keys.JWT_SECRET,
   algorithms: ["HS256"], // added later
   userProperty: "auth",
 });
