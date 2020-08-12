@@ -14,6 +14,7 @@ import Shop from "./core/Shop";
 import Product from "./core/Product";
 import Cart from "./core/Cart";
 import Orders from "./admin/Order";
+import Profile from "./user/Profile";
 
 function Routes() {
   return (
@@ -23,11 +24,8 @@ function Routes() {
         <Route path="/shop" exact component={Shop}></Route>
         <Route path="/signin" exact component={Signin}></Route>
         <Route path="/signup" exact component={Signup}></Route>
-        <PrivateRoute
-          path="/user/dashboard"
-          exact
-          component={Dashboard}
-        ></PrivateRoute>
+        <Route path="/products/:productId" exact component={Product}></Route>
+        <Route path="/cart" exact component={Cart}></Route>
         <AdminRoute
           path="/admin/dashboard"
           exact
@@ -43,9 +41,17 @@ function Routes() {
           exact
           component={AddProduct}
         ></AdminRoute>
-        <Route path="/products/:productId" exact component={Product}></Route>
-        <Route path="/cart" exact component={Cart}></Route>
         <AdminRoute path="/admin/orders" exact component={Orders}></AdminRoute>
+        <PrivateRoute
+          path="/user/dashboard"
+          exact
+          component={Dashboard}
+        ></PrivateRoute>
+        <PrivateRoute
+          path="/profile/:userId"
+          exact
+          component={Profile}
+        ></PrivateRoute>
       </Switch>
     </BrowserRouter>
   );

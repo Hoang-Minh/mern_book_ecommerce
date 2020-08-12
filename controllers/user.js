@@ -17,6 +17,7 @@ exports.read = (req, res) => {
 
   return res.json(req.profile);
 };
+
 exports.update = (req, res) => {
   User.findOneAndUpdate(
     { _id: req.profile._id },

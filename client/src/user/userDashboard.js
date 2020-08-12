@@ -19,7 +19,7 @@ function UserDashboard() {
             </Link>
           </li>
           <li className="list-group-item">
-            <Link className="nav-link" to="/profile/udpate">
+            <Link className="nav-link" to={`/profile/${_id}`}>
               Update Profile
             </Link>
           </li>
