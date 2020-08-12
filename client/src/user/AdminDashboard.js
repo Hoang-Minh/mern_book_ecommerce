@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 
 function AdminDashboard() {
   const {
-    user: { _id, name, email, role },
+    user: { name, email, role },
   } = isAuthenticated();
 
   const adminLinks = () => {

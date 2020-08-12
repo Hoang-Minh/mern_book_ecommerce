@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import styles from "../styles.css";
+import styles from "../styles.css"; // need it for the styles
 
 function Layout({
   title = "Title",

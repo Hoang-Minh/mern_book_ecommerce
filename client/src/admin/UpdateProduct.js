@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { getProduct, getCategories, updateProduct } from "./apiAdmin";
 
 const UpdateProduct = ({ match }) => {
@@ -27,9 +27,6 @@ const UpdateProduct = ({ match }) => {
     name,
     description,
     price,
-    // categories,
-    category,
-    shipping,
     quantity,
     loading,
     error,
