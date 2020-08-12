@@ -27,7 +27,7 @@ mongoose
   .then(() => console.log("database connected"));
 
 // middlewares
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());

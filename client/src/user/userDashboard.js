@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
+import { getPurchaseHistory } from "./apiUser";
 
 function UserDashboard() {
   const {
     user: { _id, name, email, role },
+    token,
   } = isAuthenticated();
+  const [history, setHistory] = useState([]);
+
+  const init = (userId, token) => {
+    getPurchaseHistory(userId, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setHistory(data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    init(_id, token);
+  }, []);
 
   const userLinks = () => {
     return (
@@ -43,16 +60,17 @@ function UserDashboard() {
     );
   };
 
-  const purchaseHistory = () => {
+  const purchaseHistory = (history) => {
     return (
       <div className="card mb-5">
         <h3 className="card-header">Purchase History</h3>
         <ul className="list-group">
-          <li className="list-group-item">history</li>
+          <li className="list-group-item">{JSON.stringify(history)}</li>
         </ul>
       </div>
     );
   };
+
   return (
     <Layout
       title="Dashboard"
@@ -62,7 +80,7 @@ function UserDashboard() {
       <div className="row">
         <div className="col-3">{userLinks()}</div>
         <div className="col-9">
-          {userInfo()} {purchaseHistory()}
+          {userInfo()} {purchaseHistory(history)}
         </div>
       </div>
     </Layout>

@@ -14,6 +14,7 @@ export const read = (userId, token) => {
 };
 
 export const update = (userId, token, user) => {
+  console.log("update from apiUser", userId, token, user);
   return fetch(`${API}/user/${userId}`, {
     method: "PUT",
     headers: {
@@ -37,4 +38,17 @@ export const updateUser = (user, next) => {
       next();
     }
   }
+};
+
+export const getPurchaseHistory = (userId, token) => {
+  return fetch(`${API}/orders/by/user/${userId}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
 };
