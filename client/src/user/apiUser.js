@@ -39,7 +39,7 @@ export const updateUser = (user, next) => {
 };
 
 export const getPurchaseHistory = (userId, token) => {
-  return fetch(`$/api/orders/by/user/${userId}`, {
+  return fetch(`/api/orders/by/user/${userId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",

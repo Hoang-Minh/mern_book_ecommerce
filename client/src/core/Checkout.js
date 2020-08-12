@@ -27,6 +27,7 @@ function Checkout({ products, setRun = (f) => f, run = undefined }) {
       if (data.error) {
         setData({ ...data, error: data.error });
       } else {
+        console.log("brain tree token", data);
         setData({ clientToken: data.clientToken });
       }
     });
