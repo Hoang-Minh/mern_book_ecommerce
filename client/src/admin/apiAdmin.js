@@ -82,3 +82,50 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+
+// get all products
+// get a single product
+// update a single product
+// delete single product
+export const getProducts = () => {
+  return fetch(`${API}/products`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deleteProduct = (productId, userId, token) => {
+  return fetch(`${API}/products/${productId}/${userId}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getProduct = (productId) => {
+  return fetch(`${API}/product/${productId}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const updateProduct = (productId, userId, token, product) => {
+  return fetch(`${API}/products/${productId}/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+
+      Authorization: `Bearer ${token}`,
+    },
+    body: product, // do not stringify cuz we are going to use form data
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};

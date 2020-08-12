@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Home from "./core/Home";
-import Menu from "./core/Menu";
 import PrivateRoute from "./auth/PrivateRoute";
 import Dashboard from "./user/UserDashboard";
 import AdminRoute from "./auth/AdminRoutes";
@@ -15,6 +14,7 @@ import Product from "./core/Product";
 import Cart from "./core/Cart";
 import Orders from "./admin/Order";
 import Profile from "./user/Profile";
+import ManageProducts from "./admin/ManageProducts";
 
 function Routes() {
   return (
@@ -42,6 +42,11 @@ function Routes() {
           component={AddProduct}
         ></AdminRoute>
         <AdminRoute path="/admin/orders" exact component={Orders}></AdminRoute>
+        <AdminRoute
+          path="/admin/products"
+          exact
+          component={ManageProducts}
+        ></AdminRoute>
         <PrivateRoute
           path="/user/dashboard"
           exact
