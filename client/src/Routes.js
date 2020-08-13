@@ -6,6 +6,7 @@ import Home from "./core/Home";
 import PrivateRoute from "./auth/PrivateRoute";
 import AdminRoute from "./auth/AdminRoutes";
 import AdminDashboard from "./user/AdminDashboard";
+import UserDashboard from "./user/UserDashboard";
 import Test from "./user/Test";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
@@ -56,7 +57,7 @@ function Routes() {
         <PrivateRoute
           path="/user/dashboard"
           exact
-          component={Test}
+          component={UserDashboard}
         ></PrivateRoute>
         <PrivateRoute
           path="/profile/:userId"
