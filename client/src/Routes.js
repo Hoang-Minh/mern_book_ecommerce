@@ -4,9 +4,9 @@ import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Home from "./core/Home";
 import PrivateRoute from "./auth/PrivateRoute";
-import UserDashboard from "./user/UserDashboard";
 import AdminRoute from "./auth/AdminRoutes";
 import AdminDashboard from "./user/AdminDashboard";
+import Test from "./user/Test";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import Shop from "./core/Shop";
@@ -56,7 +56,7 @@ function Routes() {
         <PrivateRoute
           path="/user/dashboard"
           exact
-          component={UserDashboard}
+          component={Test}
         ></PrivateRoute>
         <PrivateRoute
           path="/profile/:userId"
