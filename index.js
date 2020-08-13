@@ -1,8 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-// const helmet = require("helmet");
-// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user.js");
@@ -31,8 +29,6 @@ mongoose
 app.use(morgan("common"));
 app.use(express.json());
 app.use(cookieParser());
-//app.use(helmet());
-// app.use(cors());
 
 // routes middleware
 app.use("/api", authRoutes);
