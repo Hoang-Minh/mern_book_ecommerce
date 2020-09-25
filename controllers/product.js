@@ -121,7 +121,7 @@ exports.list = (req, res) => {
     });
 };
 
-// will the products baded on the req product cateogry
+// will return products based on the req product cateogry
 // other products that has the same category will be returned.
 exports.listRelated = (req, res) => {
   const limit = req.query.limit ? parseInt(req.query.limit) : 6;
@@ -143,14 +143,7 @@ exports.listCategories = (req, res) => {
   });
 };
 
-/**
- * list products by search
- * we will implement product search in react frontend
- * we will show categories in checkbox and price range in radio buttons
- * as the user clicks on those checkbox and radio buttons
- * we will make api request and show the products to users based on what he wants
- */
-
+// return list of products with filters
 exports.listBySearch = (req, res) => {
   const order = req.body.order ? req.body.order : "desc";
   const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
@@ -164,8 +157,6 @@ exports.listBySearch = (req, res) => {
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
-        // gte -  greater than price [0-10]
-        // lte - less than
         findArgs[key] = {
           $gte: req.body.filters[key][0],
           $lte: req.body.filters[key][1],
@@ -207,17 +198,17 @@ exports.photo = (req, res, next) => {
 exports.listSearch = (req, res) => {
   // create query object to hold search value and category value
   const query = {};
-  // asign search value to query.name
+
+  // build query to search, option i - stands for incase sensitive
   if (req.query.search) {
     query.name = { $regex: req.query.search, $options: "i" };
 
     // asign category value to query.category
+    // find the product based on query object with 2 properties: name and category. By default, category All will be selected in front end
     if (req.query.cateogry & (req.query.category !== "All")) {
       query.category = req.query.category;
     }
 
-    // find the product based on query object with 2 properties
-    // search and category
     Product.find(query, (error, products) => {
       if (error) return res.status(400).json({ error: errorHandler(error) });
 

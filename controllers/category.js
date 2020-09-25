@@ -28,10 +28,8 @@ exports.read = (req, res) => {
   return res.json(req.category);
 };
 
-// issue !!!
 exports.update = (req, res) => {
   const category = req.category;
-  // console.log(category);
   console.log(req.body);
   category.name = req.body.name;
   category.save((error, data) => {

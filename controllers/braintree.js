@@ -1,4 +1,3 @@
-const User = require("../models/users");
 const braintree = require("braintree");
 const keys = require("../config/keys");
 
