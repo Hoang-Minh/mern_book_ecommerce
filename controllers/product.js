@@ -205,9 +205,12 @@ exports.listSearch = (req, res) => {
 
     // asign category value to query.category
     // find the product based on query object with 2 properties: name and category. By default, category All will be selected in front end
-    if (req.query.cateogry & (req.query.category !== "All")) {
+    if (req.query.category && req.query.category !== "All") {
+      console.log("assign category");
       query.category = req.query.category;
     }
+
+    console.log("query", query);
 
     Product.find(query, (error, products) => {
       if (error) return res.status(400).json({ error: errorHandler(error) });
