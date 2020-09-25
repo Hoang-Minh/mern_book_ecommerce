@@ -35,6 +35,7 @@
     "uuidv1": "^1.6.14"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
   }
 }

@@ -19,26 +19,24 @@ exports.signup = (req, res, next) => {
   });
 };
 
-exports.signIn = (req, res, next) => {
-  // find user based on email
+exports.signIn = (req, res) => {
   const { email, password } = req.body;
-  const user = User.findOne({ email }, (error, user) => {
+
+  User.findOne({ email }, (error, user) => {
     if (error || !user) {
       return res
         .status(400)
         .json({ error: "User with email does not exist. Please sign up" });
     }
 
-    // if user if found, check if email and password match
-
-    // create authenticate
+    // user found, but password does not match
     if (!user.authenticate(password))
       return res.status(401).json({ error: "Email and password don't match" });
 
     // generate a signed token with user id and secret
     const token = jwt.sign({ _id: user._id }, keys.JWT_SECRET);
 
-    // persist token as "t" in cookie with expiry date - should we have expiry date in token ???
+    // persist token as "t" in cookie with expiry date
     res.cookie("t", token, { expire: new Date() + 9999 });
 
     // return response with user and token to front end
