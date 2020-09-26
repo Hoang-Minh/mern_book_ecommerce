@@ -151,9 +151,6 @@ exports.listBySearch = (req, res) => {
   const skip = parseInt(req.body.skip);
   const findArgs = {};
 
-  // console.log(order, sortBy, limit, skip, req.body.filters);
-  // console.log("findArgs", findArgs);
-
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
@@ -206,11 +203,8 @@ exports.listSearch = (req, res) => {
     // asign category value to query.category
     // find the product based on query object with 2 properties: name and category. By default, category All will be selected in front end
     if (req.query.category && req.query.category !== "All") {
-      console.log("assign category");
       query.category = req.query.category;
     }
-
-    console.log("query", query);
 
     Product.find(query, (error, products) => {
       if (error) return res.status(400).json({ error: errorHandler(error) });

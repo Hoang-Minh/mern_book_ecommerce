@@ -43,7 +43,6 @@ function Shop() {
     }
 
     loadFilteredResults(myFilters.filters);
-
     setMyFilters(newFilters);
   };
 
