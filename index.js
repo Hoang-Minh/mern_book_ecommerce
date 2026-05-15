@@ -17,13 +17,9 @@ const app = express();
 
 //db
 mongoose
-  .connect(keys.MONGO_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => console.log("database connected"));
+  .connect(keys.MONGO_URI)
+  .then(() => console.log("database connected"))
+  .catch((err) => console.error("database connection error", err));
 
 // middlewares
 app.use(morgan("common"));
