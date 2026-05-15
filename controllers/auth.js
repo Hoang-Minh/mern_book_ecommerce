@@ -34,6 +34,7 @@ exports.signIn = async (req, res) => {
     const { _id, name, email: userEmail, role } = user;
     return res.json({ token, user: { _id, email: userEmail, name, role } });
   } catch (error) {
+    console.error("signIn error:", error);
     return res.status(400).json({ error: "Error signing in" });
   }
 };
