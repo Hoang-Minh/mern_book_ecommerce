@@ -1,7 +1,7 @@
 const braintree = require("braintree");
 const keys = require("../config/keys");
 
-const gateway = braintree.connect({
+const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
   merchantId: keys.BRAINTREE_MERCHANT_ID,
   publicKey: keys.BRAINTREE_PUBLIC_KEY,
@@ -11,7 +11,7 @@ const gateway = braintree.connect({
 exports.generateToken = (req, res) => {
   gateway.clientToken.generate({}, function (error, response) {
     if (error) {
-      res.status(500).send(err);
+      res.status(500).send(error);
     } else {
       res.send(response);
     }
@@ -19,21 +19,17 @@ exports.generateToken = (req, res) => {
 };
 
 exports.processPayment = (req, res) => {
-  const nonceFromTheClient = req.body.paymentMethodNonce; //payment method
+  const nonceFromTheClient = req.body.paymentMethodNonce;
   const amountFromTheClient = req.body.amount;
 
-  // charge
-  const newTransaction = gateway.transaction.sale(
+  gateway.transaction.sale(
     {
       amount: amountFromTheClient,
       paymentMethodNonce: nonceFromTheClient,
-      options: {
-        submitForSettlement: true,
-      },
+      options: { submitForSettlement: true },
     },
     (error, result) => {
       if (error) return res.status(500).json(error);
-
       res.json(result);
     }
   );
