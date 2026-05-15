@@ -26,6 +26,7 @@ exports.update = async (req, res) => {
       { $set: req.body },
       { new: true }
     );
+    if (!user) return res.status(400).json({ error: "User not found" });
     user.hashed_password = undefined;
     user.salt = undefined;
     res.json(user);

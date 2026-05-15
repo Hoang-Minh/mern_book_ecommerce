@@ -174,6 +174,7 @@ exports.photo = (req, res, next) => {
 };
 
 exports.listSearch = async (req, res) => {
+  if (!req.query.search) return res.json([]);
   const query = {};
   if (req.query.search) {
     query.name = { $regex: req.query.search, $options: "i" };
