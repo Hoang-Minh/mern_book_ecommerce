@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { read, listRelated } from "./apiCore";
 import Card from "./Card";
+import { useParams } from "react-router-dom";
 
-function Product({ match }) {
+function Product() {
+  const { productId } = useParams();
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [error, setError] = useState(false);
@@ -27,9 +29,8 @@ function Product({ match }) {
   };
 
   useEffect(() => {
-    const productId = match.params.productId;
     loadSingleProduct(productId);
-  }, [match]);
+  }, [productId]);
 
   return (
     <Layout

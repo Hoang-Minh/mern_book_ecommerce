@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Home from "./core/Home";
@@ -7,7 +7,6 @@ import PrivateRoute from "./auth/PrivateRoute";
 import AdminRoute from "./auth/AdminRoutes";
 import AdminDashboard from "./user/AdminDashboard";
 import UserDashboard from "./user/UserDashboard";
-import Test from "./user/Test";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import Shop from "./core/Shop";
@@ -18,55 +17,31 @@ import Profile from "./user/Profile";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 
-function Routes() {
+function AppRoutes() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/shop" exact component={Shop}></Route>
-        <Route path="/signin" exact component={Signin}></Route>
-        <Route path="/signup" exact component={Signup}></Route>
-        <Route path="/products/:productId" exact component={Product}></Route>
-        <Route path="/cart" exact component={Cart}></Route>
-        <AdminRoute
-          path="/admin/dashboard"
-          exact
-          component={AdminDashboard}
-        ></AdminRoute>
-        <AdminRoute
-          path="/create/category"
-          exact
-          component={AddCategory}
-        ></AdminRoute>
-        <AdminRoute
-          path="/create/product"
-          exact
-          component={AddProduct}
-        ></AdminRoute>
-        <AdminRoute path="/admin/orders" exact component={Orders}></AdminRoute>
-        <AdminRoute
-          path="/admin/products"
-          exact
-          component={ManageProducts}
-        ></AdminRoute>
-        <AdminRoute
-          path="/admin/product/update/:productId"
-          exact
-          component={UpdateProduct}
-        ></AdminRoute>
-        <PrivateRoute
-          path="/user/dashboard"
-          exact
-          component={UserDashboard}
-        ></PrivateRoute>
-        <PrivateRoute
-          path="/profile/:userId"
-          exact
-          component={Profile}
-        ></PrivateRoute>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/products/:productId" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/create/category" element={<AddCategory />} />
+          <Route path="/create/product" element={<AddProduct />} />
+          <Route path="/admin/orders" element={<Orders />} />
+          <Route path="/admin/products" element={<ManageProducts />} />
+          <Route path="/admin/product/update/:productId" element={<UpdateProduct />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/profile/:userId" element={<Profile />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
 
-export default Routes;
+export default AppRoutes;

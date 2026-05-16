@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import moment from "moment";
 import ShowImage from "./ShowImage";
 import { addItem, updateItem, removeItem } from "./cartHelpers";
@@ -34,7 +34,7 @@ function Card({
   };
 
   const shouldRedirect = (redirect) => {
-    if (redirect) return <Redirect to="/cart"></Redirect>;
+    if (redirect) return <Navigate to="/cart" replace />;
   };
 
   const showAddToCart = (showAddToCartButton) =>

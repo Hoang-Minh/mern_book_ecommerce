@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import Routes from "./Routes";
-import App from "./App";
 
-ReactDOM.render(<Routes></Routes>, document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<Routes />);

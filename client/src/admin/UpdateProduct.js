@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { Redirect } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { getProduct, getCategories, updateProduct } from "./apiAdmin";
 
-const UpdateProduct = ({ match }) => {
+const UpdateProduct = () => {
+  const { productId } = useParams();
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -69,7 +70,7 @@ const UpdateProduct = ({ match }) => {
   };
 
   useEffect(() => {
-    init(match.params.productId);
+    init(productId);
   }, []);
 
   const handleChange = (name) => (event) => {
@@ -82,7 +83,7 @@ const UpdateProduct = ({ match }) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
 
-    updateProduct(match.params.productId, user._id, token, formData).then(
+    updateProduct(productId, user._id, token, formData).then(
       (data) => {
         if (data.error) {
           setValues({ ...values, error: data.error });
@@ -211,7 +212,7 @@ const UpdateProduct = ({ match }) => {
   const redirectUser = () => {
     if (redirectToProfile) {
       if (!error) {
-        return <Redirect to="/" />;
+        return <Navigate to="/" replace />;
       }
     }
   };

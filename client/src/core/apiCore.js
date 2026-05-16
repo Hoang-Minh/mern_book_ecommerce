@@ -1,5 +1,3 @@
-import queryString from "querystring";
-
 export const getProducts = (sortBy) => {
   console.log("get Products");
   return fetch(`/api/products?sortBy=${sortBy}&&order=desc&&limit=6`, {
@@ -29,7 +27,7 @@ export const getFilteredProducts = (skip, limit, filters = []) => {
 };
 
 export const list = (params) => {
-  const query = queryString.stringify(params);
+  const query = new URLSearchParams(params).toString();
   return fetch(`/api/products/search?${query}`, {
     method: "GET",
   })

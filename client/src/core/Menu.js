@@ -1,22 +1,25 @@
 import React, { Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 
-const isActive = (history, path) => {
-  if (history.location.pathname === path) {
+const isActive = (location, path) => {
+  if (location.pathname === path) {
     return { color: "#ff9900" };
   }
 
   return { color: "#ffffff" };
 };
 
-function Menu({ history }) {
+function Menu() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div>
       <ul className="nav nav-tabs bg-primary">
         <li className="nav-item">
-          <Link className="nav-link" style={isActive(history, "/")} to="/">
+          <Link className="nav-link" style={isActive(location, "/")} to="/">
             Home
           </Link>
         </li>
@@ -24,7 +27,7 @@ function Menu({ history }) {
         <li className="nav-item">
           <Link
             className="nav-link"
-            style={isActive(history, "/shop")}
+            style={isActive(location, "/shop")}
             to="/shop"
           >
             Shop
@@ -34,7 +37,7 @@ function Menu({ history }) {
         <li className="nav-item">
           <Link
             className="nav-link"
-            style={isActive(history, "/cart")}
+            style={isActive(location, "/cart")}
             to="/cart"
           >
             Cart{" "}
@@ -48,7 +51,7 @@ function Menu({ history }) {
           <li className="nav-item">
             <Link
               className="nav-link"
-              style={isActive(history, "/")}
+              style={isActive(location, "/user/dashboard")}
               to="/user/dashboard"
             >
               Dashboard User
@@ -60,7 +63,7 @@ function Menu({ history }) {
           <li className="nav-item">
             <Link
               className="nav-link"
-              style={isActive(history, "/")}
+              style={isActive(location, "/admin/dashboard")}
               to="/admin/dashboard"
             >
               Dashboard Admin
@@ -73,7 +76,7 @@ function Menu({ history }) {
             <li className="nav-item">
               <Link
                 className="nav-link"
-                style={isActive(history, "/signin")}
+                style={isActive(location, "/signin")}
                 to="/signin"
               >
                 Signin
@@ -82,7 +85,7 @@ function Menu({ history }) {
             <li className="nav-item">
               <Link
                 className="nav-link"
-                style={isActive(history, "/signup")}
+                style={isActive(location, "/signup")}
                 to="/signup"
               >
                 Signup
@@ -98,7 +101,7 @@ function Menu({ history }) {
               style={{ cursor: "pointer", color: "#ffffff" }}
               onClick={() =>
                 signout(() => {
-                  history.push("/");
+                  navigate("/");
                 })
               }
             >
@@ -111,4 +114,4 @@ function Menu({ history }) {
   );
 }
 
-export default withRouter(Menu);
+export default Menu;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { Redirect } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { read, update, updateUser } from "./apiUser";
 
-function Profile({ match }) {
+function Profile() {
+  const { userId } = useParams();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -29,7 +30,7 @@ function Profile({ match }) {
   };
 
   const redirectUser = (success) => {
-    if (success) return <Redirect to="/cart"></Redirect>;
+    if (success) return <Navigate to="/cart" replace />;
   };
 
   const handleChange = (inputName) => (event) => {
@@ -40,7 +41,7 @@ function Profile({ match }) {
     event.preventDefault();
     console.log("on profile change", token, name, email, password);
 
-    update(match.params.userId, token, { name, email, password }).then(
+    update(userId, token, { name, email, password }).then(
       (data) => {
         if (data.error) {
           console.log(data.error);
@@ -92,7 +93,7 @@ function Profile({ match }) {
   );
 
   useEffect(() => {
-    init(match.params.userId);
+    init(userId);
   }, []);
 
   return (
