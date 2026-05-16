@@ -9,6 +9,7 @@ export default defineConfig({
     exclude: [],
   },
   optimizeDeps: {
+    include: ["braintree-web-drop-in-react"],
     esbuildOptions: {
       loader: {
         ".js": "jsx",
